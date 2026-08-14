@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alpha Protect</title>
+<meta name="description" content="Alpha Protect. De site wordt opnieuw ingericht. Neem contact op via info@alpha-protect.nl.">
+<style>
+:root{
+  --bg:#010057;
+  --ink:#ffffff;
+  --muted:#a9a6dd;
+  --hair:rgba(255,255,255,.2);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font:400 17px/1.7 "Segoe UI",system-ui,-apple-system,sans-serif;
+  display:grid;
+  place-items:center;
+  padding:120px 28px 56px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* hazard stripes, the under-construction language rendered in the brand
+   instead of yellow tape. barely there on purpose. */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(
+    -45deg,
+    rgba(255,255,255,.035) 0 2px,
+    transparent 2px 16px
+  );
+}
+/* corners fall away so the watermark never fights the text */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 76% 60% at 50% 50%,transparent 0%,rgba(0,0,18,.5) 100%);
+}
+
+/* the cordon: an area marked off, ticks at the corners */
+.cordon{position:fixed;inset:22px;border:1px solid var(--hair);pointer-events:none}
+.cordon i{position:absolute;width:22px;height:22px}
+.cordon i::before,.cordon i::after{content:"";position:absolute;background:var(--ink)}
+.cordon i::before{width:100%;height:2px}
+.cordon i::after{width:2px;height:100%}
+.cordon i:nth-child(1){top:-1px;left:-1px}
+.cordon i:nth-child(2){top:-1px;right:-1px}
+.cordon i:nth-child(2)::before{right:0}
+.cordon i:nth-child(2)::after{right:0}
+.cordon i:nth-child(3){bottom:-1px;left:-1px}
+.cordon i:nth-child(3)::before{bottom:0}
+.cordon i:nth-child(4){bottom:-1px;right:-1px}
+.cordon i:nth-child(4)::before{bottom:0;right:0}
+.cordon i:nth-child(4)::after{right:0}
+
+/* under-construction drawing, sunk into the background as a shadow */
+.watermark{
+  position:fixed;
+  left:50%;top:52%;
+  transform:translate(-50%,-50%);
+  width:min(760px,116vw);
+  height:auto;
+  opacity:.075;
+  pointer-events:none;
+}
+
+/* logo, top left, the supplied file untouched */
+.lockup{
+  position:fixed;top:44px;left:44px;
+  width:190px;height:auto;display:block;
+  z-index:2;
+}
+
+main{position:relative;z-index:1;text-align:center;max-width:600px}
+
+.label{
+  font-size:11.5px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--muted);
+}
+h1{
+  margin-top:20px;
+  font-size:clamp(23px,3.3vw,33px);
+  font-weight:600;letter-spacing:-.012em;line-height:1.32;
+}
+.sub{margin-top:14px;color:var(--muted)}
+.mail{margin-top:30px;font-size:19px}
+.mail a{
+  color:var(--ink);font-weight:700;text-decoration:none;
+  border-bottom:2px solid rgba(255,255,255,.35);padding-bottom:3px;
+}
+.mail a:hover,.mail a:focus-visible{border-bottom-color:var(--ink)}
+.mail a:focus-visible{outline:2px solid var(--ink);outline-offset:6px;border-radius:2px}
+
+@media(max-width:600px){
+  body{padding:132px 22px 44px}
+  .cordon{inset:14px}
+  .lockup{top:34px;left:32px;width:132px}
+  .label{letter-spacing:.24em}
+  /* narrow screens: drop the drawing below the copy instead of behind it */
+  .watermark{top:auto;bottom:6vh;transform:translateX(-50%);width:118vw;opacity:.05}
+}
+</style>
+</head>
+<body>
+
+<div class="cordon" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+<!-- crane hoisting a browser window, drawn as line art and dropped almost
+     to nothing so it reads as a shadow rather than an illustration -->
+<svg class="watermark" viewBox="0 0 420 330" fill="none" aria-hidden="true"
+     stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+  <!-- mast -->
+  <path d="M243 62v186M267 62v186"/>
+  <path d="M243 88l24 26M267 88l-24 26M243 140l24 26M267 140l-24 26M243 192l24 26M267 192l-24 26"/>
+  <path d="M239 248h32"/>
+  <!-- jib and counter-jib -->
+  <path d="M120 62h190M120 62l24-22h166l0 22"/>
+  <path d="M144 40l24 22M168 40l24 22M192 40l24 22M216 40l24 22M270 40l22 22M294 40l16 22"/>
+  <path d="M310 62v16h-24"/>
+  <!-- hoist cable and sling -->
+  <path d="M176 62v34"/>
+  <path d="M166 96h20l-2 10h-16z"/>
+  <path d="M176 106l-34 40M176 106l34 40"/>
+  <!-- browser window -->
+  <rect x="128" y="146" width="164" height="140" rx="7"/>
+  <path d="M128 170h164"/>
+  <circle cx="143" cy="158" r="3.4"/><circle cx="156" cy="158" r="3.4"/><circle cx="169" cy="158" r="3.4"/>
+  <rect x="150" y="186" width="120" height="34" rx="3"/>
+  <path d="M172 210l14-14 10 10 12-16 20 20"/>
+  <path d="M150 240h120M150 256h120M150 272h78"/>
+  <!-- clouds it is being lifted through -->
+  <path d="M74 236c-11 0-19 8-19 18s8 17 19 17h44"/>
+  <path d="M96 236c5-11 21-12 27-2"/>
+  <path d="M346 262c11 0 19 8 19 17s-8 17-19 17h-44"/>
+  <path d="M324 262c-5-11-21-12-27-2"/>
+  <path d="M100 292c-9 0-16 7-16 15h64"/>
+</svg>
+
+<img class="lockup" src="logo-cut.png" alt="Alpha Protect">
+
+<main>
+  <p class="label">Under construction</p>
+  <h1>Deze site wordt opnieuw ingericht.</h1>
+  <p class="sub">U kunt contact met ons opnemen via de mail.</p>
+  <p class="mail"><a href="mailto:info@alpha-protect.nl">info@alpha-protect.nl</a></p>
+</main>
+
+</body>
+</html>
